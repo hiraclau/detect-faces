@@ -7,7 +7,7 @@ import {
 function App() {
   const [imageBytes, setImageBytes] = useState(null);
   const [imageURL, setImageURL] = useState('');
-  const [faceBoundingBoxes, setFaceBoundingBoxes] = useState([]);
+
   const [faces, setFaces] = useState([]);
   const boundingBoxStyles = {
     position: 'absolute',
@@ -21,7 +21,6 @@ function App() {
     const reader = new FileReader();
 
     reader.onload = (event) => {
-      setFaceBoundingBoxes([]);
       setFaces([]);
       setImageURL(event.target.result);
 
@@ -62,13 +61,7 @@ function App() {
 
     const response = await client.send(command);
 
-    const newFaceBoundingBoxes = response.FaceDetails.map(
-      (faceDetail) => faceDetail.BoundingBox,
-    );
-
     const newFaces = response.FaceDetails.map((faceDetail) => faceDetail);
-
-    setFaceBoundingBoxes(newFaceBoundingBoxes);
     setFaces(newFaces);
     console.log(newFaces);
   };
@@ -94,6 +87,7 @@ function App() {
         </div>
         <div style={{ position: 'relative', width: '50vw' }}>
           <img
+            hidden={imageURL == ''}
             src={imageURL}
             className='img-fluid'
             alt='Imagem'
