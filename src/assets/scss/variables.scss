@@ -1,0 +1,10 @@
+@import 'node_modules/bootstrap/scss/functions';
+@import 'node_modules/bootstrap/scss/variables';
+@import 'node_modules/bootstrap/scss/mixins';
+
+$min-contrast-ratio: 0.1;
+
+$theme-colors: (
+  'primary': #f25757,
+  'secondary': blue,
+);
