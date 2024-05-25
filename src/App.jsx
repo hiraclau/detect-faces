@@ -85,109 +85,111 @@ function App() {
             Enviar
           </button>
         </div>
-        <div style={{ position: 'relative', width: '50vw' }}>
-          <img
-            hidden={imageURL == ''}
-            src={imageURL}
-            className='img-fluid'
-            alt='Imagem'
-          />
-          {faces.length > 0 &&
-            faces.map((face, index) => {
-              const { Left, Top, Width, Height } = face.BoundingBox;
-              return (
-                <div
-                  key={index}
-                  style={{
-                    ...boundingBoxStyles,
-                    left: `${Left * 100}%`,
-                    top: `${Top * 100}%`,
-                    width: `${Width * 100}%`,
-                    height: `${Height * 100}%`,
-                  }}
-                >
-                  <span
+        <div className='d-grid justify-content-center'>
+          <div style={{ position: 'relative', width: '50vw' }}>
+            <img
+              hidden={imageURL == ''}
+              src={imageURL}
+              className='img-fluid'
+              alt='Imagem'
+            />
+            {faces.length > 0 &&
+              faces.map((face, index) => {
+                const { Left, Top, Width, Height } = face.BoundingBox;
+                return (
+                  <div
+                    key={index}
                     style={{
-                      position: 'absolute',
-                      top: '-15px',
-                      left: '50%',
-                      transform: 'translate(-50%, -50%)',
-                      color: 'white',
-                      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                      padding: '2px 5px',
-                      borderRadius: '4px',
+                      ...boundingBoxStyles,
+                      left: `${Left * 100}%`,
+                      top: `${Top * 100}%`,
+                      width: `${Width * 100}%`,
+                      height: `${Height * 100}%`,
                     }}
                   >
-                    {index}
-                  </span>
-                </div>
-              );
-            })}
-          {faces.length > 0 &&
-            faces.map((face, index) => {
-              const { Left, Top, Width, Height } = face.BoundingBox;
-              const { Yaw, Pitch, Roll } = face.Pose;
-              const scale = 1.5; // Ajuste conforme necessário
-              // Calcula o comprimento das linhas com base no tamanho do bounding box
-              const lineLength = 200;
-              //  Math.min(Width * 100, Height * 100) * 0.9 * scale;
+                    <span
+                      style={{
+                        position: 'absolute',
+                        top: '-15px',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        color: 'white',
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        padding: '2px 5px',
+                        borderRadius: '4px',
+                      }}
+                    >
+                      {index}
+                    </span>
+                  </div>
+                );
+              })}
+            {faces.length > 0 &&
+              faces.map((face, index) => {
+                const { Left, Top, Width, Height } = face.BoundingBox;
+                const { Yaw, Pitch, Roll } = face.Pose;
+                const scale = 1.5; // Ajuste conforme necessário
+                // Calcula o comprimento das linhas com base no tamanho do bounding box
+                const lineLength = 200;
+                //  Math.min(Width * 100, Height * 100) * 0.9 * scale;
 
-              // Calcula as coordenadas para o centro do bounding box
-              const centerX = Left * 100 + Width * 50;
-              const centerY = Top * 100 + Height * 50;
+                // Calcula as coordenadas para o centro do bounding box
+                const centerX = Left * 100 + Width * 50;
+                const centerY = Top * 100 + Height * 50;
 
-              // Calcula as coordenadas finais para as linhas com base nos ângulos
-              const yawX = centerX + lineLength * Math.sin(Yaw);
-              const yawY = centerY - lineLength * Math.cos(Yaw);
+                // Calcula as coordenadas finais para as linhas com base nos ângulos
+                const yawX = centerX + lineLength * Math.sin(Yaw);
+                const yawY = centerY - lineLength * Math.cos(Yaw);
 
-              const pitchX = centerX + lineLength * Math.sin(Pitch);
-              const pitchY = centerY - lineLength * Math.cos(Pitch);
+                const pitchX = centerX + lineLength * Math.sin(Pitch);
+                const pitchY = centerY - lineLength * Math.cos(Pitch);
 
-              const rollX = centerX + lineLength * Math.sin(Roll);
-              const rollY = centerY - lineLength * Math.cos(Roll);
+                const rollX = centerX + lineLength * Math.sin(Roll);
+                const rollY = centerY - lineLength * Math.cos(Roll);
 
-              return (
-                <svg
-                  key={index}
-                  style={{
-                    position: 'absolute',
-                    width: `${Width * 100}%`,
-                    height: `${Height * 100}%`,
-                    left: `${Left * 100}%`,
-                    top: `${Top * 100}%`,
-                  }}
-                  viewBox={`0 0 100 100`}
-                >
-                  {/* Yaw */}
-                  <line
-                    x1={centerX}
-                    y1={centerY}
-                    x2={yawX}
-                    y2={yawY}
-                    stroke='red'
-                    strokeWidth='2'
-                  />
-                  {/* Pitch */}
-                  <line
-                    x1={centerX}
-                    y1={centerY}
-                    x2={pitchX}
-                    y2={pitchY}
-                    stroke='blue'
-                    strokeWidth='2'
-                  />
-                  {/* Roll */}
-                  <line
-                    x1={centerX}
-                    y1={centerY}
-                    x2={rollX}
-                    y2={rollY}
-                    stroke='green'
-                    strokeWidth='2'
-                  />
-                </svg>
-              );
-            })}
+                return (
+                  <svg
+                    key={index}
+                    style={{
+                      position: 'absolute',
+                      width: `${Width * 100}%`,
+                      height: `${Height * 100}%`,
+                      left: `${Left * 100}%`,
+                      top: `${Top * 100}%`,
+                    }}
+                    viewBox={`0 0 100 100`}
+                  >
+                    {/* Yaw */}
+                    <line
+                      x1={centerX}
+                      y1={centerY}
+                      x2={yawX}
+                      y2={yawY}
+                      stroke='red'
+                      strokeWidth='2'
+                    />
+                    {/* Pitch */}
+                    <line
+                      x1={centerX}
+                      y1={centerY}
+                      x2={pitchX}
+                      y2={pitchY}
+                      stroke='blue'
+                      strokeWidth='2'
+                    />
+                    {/* Roll */}
+                    <line
+                      x1={centerX}
+                      y1={centerY}
+                      x2={rollX}
+                      y2={rollY}
+                      stroke='green'
+                      strokeWidth='2'
+                    />
+                  </svg>
+                );
+              })}
+          </div>
         </div>
       </div>
       <div className='d-grid justify-content-center'>
