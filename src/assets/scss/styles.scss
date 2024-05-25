@@ -1,2 +1,7 @@
 @import './variables.scss';
 @import '../node_modules/bootstrap/scss/bootstrap';
+
+.detect {
+  position: 'relative';
+  width: '50vw';
+}

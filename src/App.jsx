@@ -69,7 +69,7 @@ function App() {
   return (
     <>
       <div className='d-grid justify-content-center'>
-        <div className='d-flex gap-2 mt-3 mb-3'>
+        <div className='d-flex gap-2 mt-3 mb-3 p-4'>
           <input
             className='form-control'
             type='file'
@@ -86,7 +86,10 @@ function App() {
           </button>
         </div>
         <div className='d-grid justify-content-center'>
-          <div style={{ position: 'relative', width: '50vw' }}>
+          <div
+            className='p-4 '
+            style={{ position: 'relative', width: '50vw' }}
+          >
             <img
               hidden={imageURL == ''}
               src={imageURL}
