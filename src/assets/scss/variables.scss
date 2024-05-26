@@ -2,9 +2,15 @@
 @import 'node_modules/bootstrap/scss/variables';
 @import 'node_modules/bootstrap/scss/mixins';
 
+$red: #f25757;
 $min-contrast-ratio: 0.1;
 
 $theme-colors: (
-  'primary': #f25757,
+  'primary': $red,
   'secondary': blue,
 );
+
+// $table-striped-bg: #b388eb;
+// $table-striped-bg-level: 0.1;
+
+// $table-hover-bg: #8093f1;
