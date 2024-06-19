@@ -122,7 +122,11 @@ function App() {
           <img
             hidden={imageURL == ''}
             src={imageURL}
-            className='img-fluid '
+            style={{
+              position: 'relative',
+              width: imageWidth,
+            }}
+            className=''
             alt='Imagem'
           />
           {faces.length > 0 &&
@@ -234,6 +238,7 @@ function App() {
               <tr>
                 <th scope='col'>#</th>
                 <th className='text-center'>Frontal</th>
+                <th className='text-center'>Cabeça abaixada</th>
                 <th className='text-secondary text-center'>Pitch (x)</th>
                 <th className='text-danger text-center'>Yaw (y)</th>
                 <th className='text-success text-center'>Roll (z)</th>
@@ -245,7 +250,15 @@ function App() {
                   <tr key={index}>
                     <td>{index}</td>
                     <td className='text-center'>
-                      {face.Pose.Yaw < 8 && face.Pose.Yaw > -8 ? 'Sim' : 'Não'}
+                      {face.Pose.Pitch < -1
+                        ? 'Não'
+                        : face.Pose.Yaw < 8 && face.Pose.Yaw > -8
+                        ? 'Sim'
+                        : 'Não'}
+                      {/* {face.Pose.Yaw < 8 && face.Pose.Yaw > -8 ? 'Sim' : 'Não'} */}
+                    </td>
+                    <td className='text-center'>
+                      {face.Pose.Pitch < -1 ? 'Sim' : 'Não'}
                     </td>
                     <td className='text-end'>{face.Pose.Pitch}</td>
                     <td className='text-end'>{face.Pose.Yaw}</td>
